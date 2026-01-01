@@ -168,6 +168,6 @@ int main()
     {
         
     }
-cout<<"Talha begairat";
+    
     return 0;
 }
