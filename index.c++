@@ -3,171 +3,99 @@ using namespace std;
 
 int main()
 {
+    int choice;
 
-    // MODULE 1
+        do 
+        {
+            cout << "--------------------------------------------" << endl;
+            cout << "--------------------------------------------" << endl;
+            cout << "  Bus Route & Seat Allocation System" << endl;
+            cout << "--------------------------------------------" << endl;
+            cout << "--------------------------------------------" << endl;
+            cout << endl;
+            cout << "1) Initialize / Reset Routes & Buses" << endl;
+            cout << "2) Add / Replace Route Records" << endl;
+            cout << "3) Add / Replace Bus Records" << endl;
+            cout << "4) Display Routes & Bus Seat Status" << endl;
+            cout << "5) Allocate Seat to Student (Transport Registration)" << endl;
+            cout << "6) Update Student Alocation Record" << endl;
+            cout << "7) Cancel Seat Allocation" << endl;
+            cout << "8) Search / Listings" << endl;
+            cout << "9) Display Bus Seat Occupancy View" << endl;
+            cout << "10) Validate Records & Detect Conflicts" << endl;
+            cout << "11) Generate reports / Summaries" << endl;
+            cout << "0) Exit" << endl;
+            cout << "-----------------------------------" << endl;
+            cout << "Enter your choice: ";
+            cin >> choice;
 
-    // 8 Routes
-    int routeID[8] = { 101, 102, 103, 104, 105, 106, 107, 108 };
-    // char routeName[8]={'L', 'I', 'K', 'M', 'F', 'S', 'R', 'G'};
+            switch (choice)
+            {
+            case 1:
+            {
 
+            }
+            break;
+            case 2:
+            {
 
-    char startingPoint;
-    char endingPoint;
-    char routeName1;
-    char routeName2;
-    // L --> Lahore55555555555
-    // I --> Islamabad
-    // K --> Karachi
-    // M --> Multan
-    // F --> Faisalabad
-    // S --> Sargodha
-    // R --> Rawalpindi
-    // G --> Gujranwala
+            }
+            break;
+            case 3:
+            {
 
-    // Starting Point Sub Module
-    cout << "Choose Starting Point." << endl;
-    cout << endl;
-    cout << "Enter L or l for City Lahore" << endl;
-    cout << "Enter I or i for City Islamabad" << endl;
-    cout << "Enter K or k for City Karachi" << endl;
-    cout << "Enter M or m for City Multan" << endl;
-    cout << "Enter F or f for City Faisalabad" << endl;
-    cout << "Enter S or s for City Sargodha" << endl;
-    cout << "Enter R or r for City Rawalpindi" << endl;
-    cout << "Enter G or g for City Gujranwala" << endl;
-    cout << endl;
+            }
+            break;
+            case 4:
+            {
 
-    cin >> startingPoint;
-    if (startingPoint == 'L' || startingPoint == 'l')
-    {
-        cout << "You chose Lahore" << endl;
-    }
-    else if (startingPoint == 'I' || startingPoint == 'i')
-    {
-        cout << "You chose Islamabad" << endl;
-    }
-    else if (startingPoint == 'K' || startingPoint == 'k')
-    {
-        cout << "You chose Karachi" << endl;
-    }
-    else if (startingPoint == 'M' || startingPoint == 'm')
-    {
-        cout << "You chose Multan" << endl;
-    }
-    else if (startingPoint == 'F' || startingPoint == 'f')
-    {
-        cout << "You chose Faisalabad" << endl;
-    }
-    else if (startingPoint == 'S' || startingPoint == 's')
-    {
-        cout << "You chose Sargodha" << endl;
-    }
-    else if (startingPoint == 'R' || startingPoint == 'r')
-    {
-        cout << "You chose Rawalpindi" << endl;
-    }
-    else if (startingPoint == 'G' || startingPoint == 'g')
-    {
-        cout << "You chose Gujranwala" << endl;
-    }
-    else
-    {
-        cout << "City doesn't exist | Error 404" << endl;
-    }
+            }
+            break;
+            case 5:
+            {
 
-    cout << endl;
-    cout << endl;
-    cout << "------------------------------------------------------------------------" << endl;
-    cout << endl;
+            }
+            break;
+            case 6:
+            {
 
-    // Ending Point Sub Module
-    cout << "Choose Ending Point." << endl;
-    cout << endl;
-    cout << "Enter L or l for City Lahore" << endl;
-    cout << "Enter I or i for City Islamabad" << endl;
-    cout << "Enter K or k for City Karachi" << endl;
-    cout << "Enter M or m for City Multan" << endl;
-    cout << "Enter F or f for City Faisalabad" << endl;
-    cout << "Enter S or s for City Sargodha" << endl;
-    cout << "Enter R or r for City Rawalpindi" << endl;
-    cout << "Enter G or g for City Gujranwala" << endl;
-    cout << endl;
+            }
+            break;
+            case 7:
+            {
 
-    cin >> endingPoint;
-    if (endingPoint == 'L' || endingPoint == 'l')
-    {
-        cout << "You chose Lahore" << endl;
+            }
+            break;
+            case 8:
+            {
 
-    }
-    else if (endingPoint == 'I' || endingPoint == 'i')
-    {
-        cout << "You chose Islamabad" << endl;
+            }
+            break;
+            case 9:
+            {
 
-    }
-    else if (endingPoint == 'K' || endingPoint == 'k')
-    {
-        cout << "You chose Karachi" << endl;
+            }
+            break;
+            case 10:
+            {
 
-    }
-    else if (endingPoint == 'M' || endingPoint == 'm')
-    {
-        cout << "You chose Multan" << endl;
+            }
+            break;
+            case 11:
+            {
 
-    }
-    else if (endingPoint == 'F' || endingPoint == 'f')
-    {
-        cout << "You chose Faisalabad" << endl;
+            }
+            break;
+            case 0:
+            {
 
-    }
-    else if (endingPoint == 'S' || endingPoint == 's')
-    {
-        cout << "You chose Sargodha" << endl;
-
-    }
-    else if (endingPoint == 'R' || endingPoint == 'r')
-    {
-        cout << "You chose Rawalpindi" << endl;
-
-    }
-    else if (endingPoint == 'G' || endingPoint == 'g')
-    {
-        cout << "You chose Gujranwala" << endl;
-
-    }
-    else
-    {
-        cout << "City doesn't exist | Error 404" << endl;
-    }
-
-    cout << endl;
-
-    cout << endl;
-    cout << endl;
-    cout << "------------------------------------------------------------------------" << endl;
-    cout << endl;
-
-    if (startingPoint == 'L' || startingPoint == 'l' && startingPoint == 'K' || startingPoint == 'k')
-    {
-        routeName1 = 'L';
-        routeName2 = 'K';
-    }
-
-    //Zunnu
-//one bus assignment module
-    int busID[8] = { 1,2,3,4,5,6,7,8 };
-    int busSeats[8] = { 30,30,50,30,60,50,50,60 };
-    if (startingPoint == 'L' || startingPoint == 'l' && endingPoint == 'K' || endingPoint == 'k')
-    {
-        cout << "Bus ID: " << busID[0] << endl;
-        cout << "Route ID: " << routeID[0] << endl;
-        cout << "Total seats are: " << busSeats[0] << endl;
-
-    }
-    else if(startingPoint == 'K' || startingPoint == 'k' )
-        
-    {
-        
-    }
+            }
+            break;
+            default:
+            cout << "Invalid Choice. Try Again." << endl;
+            }
+        } while (choice != 0);
     
+
     return 0;
 }
