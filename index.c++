@@ -181,8 +181,7 @@ int main()
 
             cout << "All Routes and Bus Records have been Successfully Cleared." << endl;
             cout << endl;
-            cout << endl;
-            cout << endl;
+          
         }
         break;
         case 2:
@@ -405,7 +404,6 @@ int main()
                         cout << "Bus " << TemporaryBusID << " added successfully!" << endl;
                         // Hence New Bus Created Successfully
                         cout << endl;
-                        cout << endl;
                     }
                 }
             }
@@ -414,6 +412,104 @@ int main()
         case 4:
         {
             cout << "Display Routes & Bus Seat Status selected." << endl;
+            cout << endl;
+
+            // This case is all about displaying things.
+            /*
+            Header: Print a nice table header (Route ID | Bus ID | Status | etc.).
+
+Loop through Buses: Since buses are the main thing that carry people, we usually iterate through the BusID array (0 to 5).
+
+Check Empty Slots: If a bus slot is -1 (empty), we skip it.
+
+Find Matching Route Info:
+
+The Bus array has the BusRouteID (e.g., 101).
+
+We need to find the Name of Route 101 (e.g., "Red Line").
+
+Challenge: We have to search the RouteID array to find which index matches 101, then grab the name from that same index.
+
+Calculate Availability: Available = Capacity - SelectedSeats.
+
+Print Row: Show all the details in one line.
+            */
+
+            cout << "==========================================================================================" << endl;
+            cout << "                          CURRENT BUS STATUS REPORT                                       " << endl;
+            cout << "==========================================================================================" << endl;
+            // Using tabs (\t) to space things out
+            cout << "Bus ID\tRoute ID\tRoute Name\t\tCapacity\tBooked\tAvailable" << endl;
+            cout << "------------------------------------------------------------------------------------------" << endl;
+
+            // First we will check if the system is completely empty.
+            bool FoundAnyBus = false;
+            // Basically we are finding Bus
+
+            for (int foundBusCounter = 0; foundBusCounter < 6; foundBusCounter++)
+            {
+                if (BusID[foundBusCounter] != -1)
+                {
+                    FoundAnyBus = true;
+
+                    // Logic of Printing the Details out.
+
+                    int CurrentRouteID = BusRouteID[foundBusCounter];
+                    // Get Bus Route ID this Bus is Assigned to.
+
+                    int RouteIndex = -1;
+                    // Find the Index where the Route Name LIVE.
+                    // Deafult it will be equal to -1, meaning not found.
+
+                    // Searching the Route List.
+                    for (int routeListCounter = 0; routeListCounter < 6; routeListCounter++)
+                    {
+                        if (RouteID[routeListCounter] == CurrentRouteID)
+                        {
+                            // We saved the location.
+                            RouteIndex = routeListCounter;
+                            break;
+                        }
+                    }
+
+                    // Now Calculating Seats
+                    int AvailableSeats = BusCapacity[foundBusCounter] - BusSelectedSeats[foundBusCounter];
+
+                    // Printing
+                    cout << BusID[foundBusCounter] << "\t" << CurrentRouteID << "\t\t";
+
+                    if (RouteIndex != -1)
+                    {
+                        // Route Name Printing If Found.
+                        cout << &RouteNames[RouteIndex * 30];
+                    }
+                    else
+                    {
+                        // Route might have been Deleted.
+                        cout << "N/A";
+                    }
+
+                    if (RouteIndex != -1)
+                    {
+                        cout << "\t\t";
+                    }
+                    else
+                    {
+                        cout << "\t\t";
+                    }
+
+
+                    cout << BusCapacity[foundBusCounter] << "\t\t" << BusSelectedSeats[foundBusCounter] << "\t" << AvailableSeats << endl;
+                }
+            }
+
+            if (!FoundAnyBus)
+            {
+                cout << "\t\t\t( No Bus Registered )" << endl;
+            }
+            cout << "------------------------------------------------------------------------------------------" << endl;
+            cout << endl;
+
         }
         break;
         case 5:
