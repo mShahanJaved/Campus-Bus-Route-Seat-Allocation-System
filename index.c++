@@ -5,41 +5,41 @@ int main()
 {
     int choice;
 
-    int RouteID[6]; 
+    int RouteID[6];
     // Total # of Routes and it should be Unique.
 
-    int RouteStops[6]; 
+    int RouteStops[6];
     // Total # of Stops.
 
-    char RouteNames[180];  
-    /* Purpose: 
+    char RouteNames[180];
+    /* Purpose:
     This stores the Name of the route (e.g., "Red Line", "Campus Loop", "City Express").
-    Why we need it: 
-    When a student books a seat, they need to know 
-    which bus line they are taking. We print this name on the screen so they can choose. 
+    Why we need it:
+    When a student books a seat, they need to know
+    which bus line they are taking. We print this name on the screen so they can choose.
     */
 
-    char RouteStartingLocation[180]; 
-    /* 
-    Purpose: 
+    char RouteStartingLocation[180];
+    /*
+    Purpose:
     This stores the Starting Location (e.g., "Main Gate", "Hostel 1", "DHA Phase 6").
     Why we need it:
-    Students need to know where the bus 
-    begins its journey so they can plan their pickup. 
+    Students need to know where the bus
+    begins its journey so they can plan their pickup.
     */
 
     char RouteEndingLocation[180];
     /*
-    Purpose: 
+    Purpose:
     This stores the Destination / Ending Location (e.g., "University Campus", "City Center").
-    Why we need it: 
+    Why we need it:
     Students need to know where the bus is going to drop them off.
     */
 
     int BusID[6];
     /*
     Purpose: Stores the Unique ID of the physical bus (e.g., Bus #99, Bus #500).
-    Why: Just like a car license plate, every bus needs a unique number so you can tell them apart. 
+    Why: Just like a car license plate, every bus needs a unique number so you can tell them apart.
     When you assign a driver or check for repairs (in real life), you use this ID.
     */
 
@@ -54,7 +54,7 @@ int main()
     int BusCapacity[6];
     /*
     Purpose: Stores the Total Number of Seats available on that bus (e.g., 40 seats, 60 seats.
-    Why: You need to know the limit. You cannot book 41 students on a bus that only has 40 seats. 
+    Why: You need to know the limit. You cannot book 41 students on a bus that only has 40 seats.
     This number acts as the "safety ceiling" for bookings.
 
     BusCapacity[6] means Seats in 6 Different Buses and not 6 Seats per Bus.
@@ -63,35 +63,41 @@ int main()
     int BusSelectedSeats[6];
     /*
     Purpose: Stores the Count of Seats Currently Taken (e.g., 5 students have booked so far).
-    Why: Availability: Capacity - Allocated = Remaining Seats. 
+    Why: Availability: Capacity - Allocated = Remaining Seats.
     You need this to tell a student "Yes, we have space" or "Sorry, full."
     Updates: Every time you book a student (Option 5), you increase this number (+1). Every time you cancel (Option 7), you decrease it (-1).
     */
 
-    
-    
 
+
+    cout << "--------------------------------------------" << endl;
+    cout << "--------------------------------------------" << endl;
+    cout << "  Bus Route & Seat Allocation System" << endl;
+    cout << "--------------------------------------------" << endl;
+    cout << "--------------------------------------------" << endl;
+    cout << endl;
+    cout << endl;
+    cout << endl;
+    cout << endl;
+    cout << "1) Initialize / Reset Routes & Buses" << endl;
+    cout << "2) Add / Replace Route Records" << endl;
+    cout << "3) Add / Replace Bus Records" << endl;
+    cout << "4) Display Routes & Bus Seat Status" << endl;
+    cout << "5) Allocate Seat to Student (Transport Registration)" << endl;
+    cout << "6) Update Student Alocation Record" << endl;
+    cout << "7) Cancel Seat Allocation" << endl;
+    cout << "8) Search / Listings" << endl;
+    cout << "9) Display Bus Seat Occupancy View" << endl;
+    cout << "10) Validate Records & Detect Conflicts" << endl;
+    cout << "11) Generate reports / Summaries" << endl;
+    cout << "0) Exit" << endl;
+    cout << "-----------------------------------" << endl;
+    cout << endl;
+    cout << endl;
     do
     {
-        cout << "--------------------------------------------" << endl;
-        cout << "--------------------------------------------" << endl;
-        cout << "  Bus Route & Seat Allocation System" << endl;
-        cout << "--------------------------------------------" << endl;
-        cout << "--------------------------------------------" << endl;
-        cout << endl;
-        cout << "1) Initialize / Reset Routes & Buses" << endl;
-        cout << "2) Add / Replace Route Records" << endl;
-        cout << "3) Add / Replace Bus Records" << endl;
-        cout << "4) Display Routes & Bus Seat Status" << endl;
-        cout << "5) Allocate Seat to Student (Transport Registration)" << endl;
-        cout << "6) Update Student Alocation Record" << endl;
-        cout << "7) Cancel Seat Allocation" << endl;
-        cout << "8) Search / Listings" << endl;
-        cout << "9) Display Bus Seat Occupancy View" << endl;
-        cout << "10) Validate Records & Detect Conflicts" << endl;
-        cout << "11) Generate reports / Summaries" << endl;
-        cout << "0) Exit" << endl;
-        cout << "-----------------------------------" << endl;
+      
+        
         cout << "Enter your choice: ";
         cin >> choice;
 
@@ -100,7 +106,7 @@ int main()
         case 1:
         {
             /*
-            
+
             Module 1: Initialization / Reset
 
      Reset all Route IDs to -1
@@ -113,7 +119,7 @@ int main()
 
             for (int routeCounter = 0; routeCounter < 6; routeCounter++) // Goes to every 6 Buses
             {
-                RouteID[routeCounter] = -1;  
+                RouteID[routeCounter] = -1;
                 // -1 means (This particular slot is empty).
 
                 RouteStops[routeCounter] = 0;
@@ -146,7 +152,7 @@ int main()
     and then 6th Route Ending is till 180.
     */
 
-                // '\0' means nothing like an empty string.
+    // '\0' means nothing like an empty string.
 
                 RouteNames[StartingPointOfLockerOfRoute] = '\0';
                 // Route Names are now empty.
@@ -174,6 +180,9 @@ int main()
             }
 
             cout << "All Routes and Bus Records have been Successfully Cleared." << endl;
+            cout << endl;
+            cout << endl;
+            cout << endl;
         }
         break;
         case 2:
@@ -189,16 +198,17 @@ int main()
             */
 
             cout << "Add / Replace Route Records selected." << endl;
+            cout << endl;
 
             int FreeSlotMethod = -1;
             /* Empty Slot Key which basically says If this Slot is Empty
                Then work on this specific slot and If not Empty then just leave it.
-            */ 
+            */
 
             for (int freeSlotCounter = 0; freeSlotCounter < 6; freeSlotCounter++)
                 // FreeSlotCouunter is a Counter Variable to remember which slot is empty by checking indexes of the variables.
             {
-                if (RouteID[freeSlotCounter] == -1) 
+                if (RouteID[freeSlotCounter] == -1)
                     // Empty Route ID Found.
                 {
                     FreeSlotMethod = freeSlotCounter;
@@ -223,7 +233,7 @@ int main()
                 // Getting RouteID from User and also so we can check if this ID is already TAKEN.
 
                 bool RouteID_Exists = false;
-                
+
                 for (int routeID_DuplicateCheckCounter = 0; routeID_DuplicateCheckCounter < 6; routeID_DuplicateCheckCounter++)
                     // Iterate through every RouteID and check if the Duplicates Exists.
                 {
@@ -293,8 +303,10 @@ int main()
 
                     cout << "Enter Route Stops: ";
                     cin >> RouteStops[FreeSlotMethod];
+                    cout << endl;
 
-                    cout << "Route " << RouteID << " added Successfully at Slot " << FreeSlotMethod << "!" << endl;
+                    cout << "Route " << TemporaryID << " added Successfully at Slot " << FreeSlotMethod << "!" << endl;
+                    cout << endl;
                 }
             }
         }
@@ -302,6 +314,101 @@ int main()
         case 3:
         {
             cout << "Add / Replace Bus Records selected." << endl;
+            cout << endl;
+
+            int FreeBusSLotMethod = -1;
+            // Finding an empty Bus Slot Via -1.
+
+            for (int freeBusSlotMethodCounter = 0; freeBusSlotMethodCounter < 6; freeBusSlotMethodCounter++)
+            {
+                if (BusID[freeBusSlotMethodCounter] == -1)
+                    // -1 means Empty.
+                {
+                    FreeBusSLotMethod = freeBusSlotMethodCounter;
+                    break;
+                    // Found one and now Stop Looking.
+                }
+            }
+
+            if (FreeBusSLotMethod == -1)
+            {
+                cout << "Error: No Space Left! ALL 6 Buses are Full." << endl;
+            }
+            else
+            {
+                // We have a Temporary Bus Slot which is Empty so now lets fill it up.
+                int TemporaryBusID;
+                cout << "Enter New Bus ID -- Eg.(501): ";
+                cin >> TemporaryBusID;
+                
+                // Process of Checking Duplicate Bus IDs.
+                bool BusIDExists = false;
+                for (int busIDExistsCounter = 0; busIDExistsCounter < 6; busIDExistsCounter++)
+                {
+                    if (BusID[busIDExistsCounter] == TemporaryBusID)
+                    {
+                        // Meaning  Bus Id Found its Duplicate.
+                        BusIDExists = true;
+                        break;
+                    }
+                }
+
+                if (BusIDExists)
+                {
+                    // Duplicate Found, So Pop up of ERROR Message.
+                    cout << "Error: Bus ID " << TemporaryBusID << " already exits!. Please Try Again." << endl;
+                }
+                else
+                {
+                    // Now Route ID Work and Its Validation and its Job is that if the route ID Exists 
+                    // Then the Bus can finally go there.
+
+                    int TemporaryAssignedRouteID;
+                    cout << "Enter Assigned Route ID -- Eg.(101): ";
+                    cin >> TemporaryAssignedRouteID;
+
+                    // Check: Does this route already exist?
+                    bool AssignedRouteFound = false;
+                    for (int assignedRouteFoundCounter = 0; assignedRouteFoundCounter < 6; assignedRouteFoundCounter++)
+                    {
+                        if (RouteID[assignedRouteFoundCounter] == TemporaryAssignedRouteID)
+                        {
+                            // We found the Route which does Exists! Good News.
+                            AssignedRouteFound = true;
+                            break;
+                        }
+                    }
+
+                    if (AssignedRouteFound == false)
+                    {
+                        // We couldn't find the Route to go to.
+                        cout << "Error: Assigned Route ID " << TemporaryAssignedRouteID << " not found! Please create the route first." << endl;
+                        cout << endl;
+
+                    }
+                    else
+                    {
+                        // We have the Desired route for the Bus to go so we will save it.
+                        BusID[FreeBusSLotMethod] = TemporaryBusID;
+                        // Saving Bus ID.
+                        BusRouteID[FreeBusSLotMethod] = TemporaryAssignedRouteID;
+                        // Saving Bus Route ID.
+
+
+                        // Now Bus Seat Capacity
+                        cout << "Enter Bus Capacity (Seats): ";
+                        cin >> BusCapacity[FreeBusSLotMethod];
+
+                        // Reset Bus Seats because like you know New Bus Always Starts Empty
+                        BusSelectedSeats[FreeBusSLotMethod] = 0;
+
+                        cout << "Bus " << TemporaryBusID << " added successfully!" << endl;
+                        // Hence New Bus Created Successfully
+                        cout << endl;
+                        cout << endl;
+                    }
+                }
+            }
         }
         break;
         case 4:
