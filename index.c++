@@ -632,7 +632,7 @@ Print Row: Show all the details in one line.
             cout << endl;
 
         }
-        break;          //z
+        break; //z
         case 5: // allocate seats to student  //Z
         {
             cout << "Allocate Seat to Student selected." << endl;
