@@ -102,6 +102,68 @@ int main()
         studentContactNumber[contactsOfStudents] = '\0';
     }
     //Z
+    for (int routeCounter = 0; routeCounter < 6; routeCounter++) // Goes to every 6 Buses
+    {
+        RouteID[routeCounter] = -1;
+        // -1 means (This particular slot is empty).
+
+        RouteStops[routeCounter] = 0;
+        // We wrote 0 because an empty route has no stops.
+
+
+        int StartingPointOfLockerOfRoute = routeCounter * 30;
+        // This tells us where this route starts from.
+
+        /*
+Starting Point of Route Based on their Index
+
+Index 0 = 0 * 30 = 0
+1st Route Starting at 0
+
+Index 1 = 1 * 30 = 30
+2nd Route Starting at 30
+
+Index 2 = 2 * 30 = 60
+3rd Route Starting at 60
+
+Index 3 = 3 * 30 = 90
+4th Route Starting at 90
+
+Index 4 = 4 * 30 = 120
+5th Route Starting at 120
+
+Index 5 = 5 * 30 = 150
+6th Route Starting at 150
+
+and then 6th Route Ending is till 180.
+*/
+
+// '\0' means nothing like an empty string.
+
+        RouteNames[StartingPointOfLockerOfRoute] = '\0';
+        // Route Names are now empty.
+
+        RouteStartingLocation[StartingPointOfLockerOfRoute] = '\0';
+        // Route Starting Point is now Empty.
+
+        RouteEndingLocation[StartingPointOfLockerOfRoute] = '\0';
+        // Route Ending Location is now Empty.
+    }
+
+    for (int busCounter = 0; busCounter < 6; busCounter++)
+    {
+        BusID[busCounter] = -1;
+        // No Bus ID.
+
+        BusRouteID[busCounter] = -1;
+        // No Bus Route ID.
+
+        BusCapacity[busCounter] = 0;
+        // The Total Bus Capacity is 0.
+
+        BusSelectedSeats[busCounter] = 0;
+        // The Seats Selected are not selected now means 0.
+    }
 
 
 
@@ -160,6 +222,7 @@ int main()
                 RouteStops[routeCounter] = 0;
                 // We wrote 0 because an empty route has no stops.
 
+                
                 int StartingPointOfLockerOfRoute = routeCounter * 30;
                 // This tells us where this route starts from.
 
@@ -214,7 +277,29 @@ int main()
                 // The Seats Selected are not selected now means 0.
             }
 
+            //inizializing allocations variables of module3 
+            for (int studentallocations = 0; studentallocations < 200; studentallocations++)
+            {
+                alocationID[studentallocations] = -1;
+                studentID[studentallocations] = -1;
+                semester[studentallocations] = 0;
+                routeIDallocation[studentallocations] = -1;
+                busIDAllocation[studentallocations] = -1;
+                seatNumber[studentallocations] = 0;
+                feeStatus[studentallocations] = 0;
+            }
+            for (int studentNameAndDepartment = 0; studentNameAndDepartment < 2000; studentNameAndDepartment++)
+            {
+                studentName[studentNameAndDepartment] = '\0';
+                studentDepartment[studentNameAndDepartment] = '0';
+            }
+            for (int contactsOfStudents = 0; contactsOfStudents < 2200; contactsOfStudents++)
+            {
+                studentContactNumber[contactsOfStudents] = '\0';
+            }
+
             cout << "All Routes and Bus Records have been Successfully Cleared." << endl;
+            cout << "All Student Information has been cleared" << endl;
             cout << endl;
 
         }
