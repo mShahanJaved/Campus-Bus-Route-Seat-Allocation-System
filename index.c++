@@ -1,4 +1,4 @@
-
+ 
 #include <iostream>
 using namespace std;
 
@@ -869,7 +869,9 @@ Print Row: Show all the details in one line.
     cin>>choice;
     switch (choice)
     {
-        int foundindex1;
+    case 6:
+    {
+        int foundindex1=-1;
        cout<<"Update Student Allocation Record Slected : ";
        cout<<endl;
        int search_location_id;
@@ -903,10 +905,11 @@ Print Row: Show all the details in one line.
       cout<<endl;
       cout<<"Record Found "<<"\t"<<"Upaditing Detils.... "<<endl;
       cout<<endl;
+      // Updating New Route
       cout<<"Enter new Route ID : ";
       cin>>routeIDallocation[foundindex1];
       bool routefound=false;
-      for (int k = 0;k < 200;k++)
+      for (int k = 0;k < 6;k++)
       {
           if (RouteID[k] == routeIDallocation[foundindex1])
           {
@@ -915,33 +918,35 @@ Print Row: Show all the details in one line.
           }
       }
       cout<<endl;
-      if (!RouteID)
+      if (!routefound)
       {
           cout<<"Invalid Route ID ..."<<" "<<"Update Cancelled"<<endl;
           break;
       }
+      // Updating Bus
       cout<<"Enter New Bus ID : ";
       cin>>busIDAllocation[foundindex1];
       int newbusindex=-1; // initilize new bus 
-      for (int o = 0;o < 200;o++)
+      for (int o = 0;o < 6;o++)
       {
           if (BusID[o] == busIDAllocation[foundindex1]&& BusRouteID[o] == busIDAllocation[foundindex1])
           {
             newbusindex=o;
            break;
           }
-          if(newbusindex==-1)
-          {
-          cout<<"Invalid Bus or Invalid Bus route : "<<endl;
+      }
+      if (newbusindex == -1)
+      {
+          cout << "Invalid Bus or Invalid Bus route : " << endl;
           break;
-         }
       }
       if (BusSelectedSeats[newbusindex] >= BusCapacity[newbusindex])
       {
           cout<<"Bus is Full . Seats are already occupied.. "<<endl;
           break;
       }
-      if (seatNumber[foundindex1]<1 || seatNumber[foundindex1] > seatNumber[newbusindex])
+      // Updating Seat Number 
+      if (seatNumber[foundindex1]<1 || seatNumber[foundindex1] > BusCapacity[newbusindex])
       {
           cout<<"Invalid seat number .. " <<endl;
           cout<<endl;
@@ -967,8 +972,9 @@ Print Row: Show all the details in one line.
      if (previousbusindex != -1) // This procedure you adding studnt to new bus
      {
          BusSelectedSeats[previousbusindex]--;
-         BusSelectedSeats[newbusindex]++; // This add student to new bus seat 
+         
      }
+     BusSelectedSeats[newbusindex]++;
      // Generating message after Allocating procedure successful
      cout<<endl;
      cout<<"==========================================================================" <<endl;
@@ -976,7 +982,11 @@ Print Row: Show all the details in one line.
      cout<<"==========================================================================" <<endl;
      break;
     }
+    default:
+    cout<<"Invalid Choice!"<<endl;
+    }
     return 0;
 
 }
+
 
