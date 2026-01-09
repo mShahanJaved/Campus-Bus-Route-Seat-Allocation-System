@@ -69,17 +69,17 @@ int main()
     */
 
     //Z
-    
+
     // Module 3 
     // Student Registration for Transport (for 200 students)
     int AllocationID[200];
     int StudentID[200];
     // 50*200 bcz we will take 0 to 50
-    char StudentName[10000]; 
+    char StudentName[10000];
     // 50*200 bcz we will take 0 to 50
     char StudentDepartment[10000];
     int Semester[200];
-    char StudentContactNumber[4000]; 
+    char StudentContactNumber[4000];
     // 200 student contact no with 11 char is 4000 ie 200*20
     int RouteIDAllocation[200];
     int BusIDAllocation[200];
@@ -660,7 +660,7 @@ Print Row: Show all the details in one line.
                     break;
                 }
             }
-            if (AllocationIndex == -1)    
+            if (AllocationIndex == -1)
                 //this means that there is no empty slot available
             {
                 cout << "All are full! Error." << endl;
@@ -690,7 +690,7 @@ Print Row: Show all the details in one line.
             // Now we will get the id of student
             cout << "Enter the student ID: ";
             cin >> StudentID[AllocationIndex];
-            
+
             //now we will check if student has already allocated slot ..
             for (int activeAllocationCounter = 0; activeAllocationCounter < 200; activeAllocationCounter++)
             {
@@ -709,11 +709,11 @@ Print Row: Show all the details in one line.
             // Now student details
             int NameStudent = AllocationIndex * 50;
             int DepartmentStudent = AllocationIndex * 50;
-            int ContactStudent = AllocationIndex * 20; 
+            int ContactStudent = AllocationIndex * 20;
             //bcz we took 11 no for contact
 
              /*
-             
+
              this is bcz
              if allocation index is 0 then
              0*10 = 0 means start from 0
@@ -745,18 +745,18 @@ Print Row: Show all the details in one line.
             {
                 if (RouteID[routeCheckCounter] == RouteIDAllocation[AllocationIndex])
                 {
-                    hasRoute = true;        
+                    hasRoute = true;
                     // means it has route
                     break;
                 }
             }
 
-            if (!hasRoute)  
+            if (!hasRoute)
                 // If there is no route available 
             {
                 cout << "No routes are available, First add the routes." << endl;
                 AllocationID[AllocationIndex] = -1;
-                break; 
+                break;
                 // No route r is there so we will break
             }
 
@@ -826,7 +826,7 @@ Print Row: Show all the details in one line.
                     break;
                 }
             }
-            if (AllocationID[AllocationIndex] == -1) 
+            if (AllocationID[AllocationIndex] == -1)
             {
                 break;
             }
@@ -861,7 +861,7 @@ Print Row: Show all the details in one line.
             {
                 cout << "Fee Status: Paid " << endl;
             }
-            else 
+            else
             {
                 cout << "Fee Status: UnPaid " << endl;
             }
@@ -875,7 +875,7 @@ Print Row: Show all the details in one line.
             cout << "Update Student Allocation Record selected." << endl;
             cout << endl;
 
-            int FoundIndex = -1;
+            int FoundIndex = -1; // Temporary Variable
             // Prepares a variable to store where (which array index 0–199) the allocation record exists; -1 means “not found yet”.
 
             int SearchAllocationID;
@@ -916,11 +916,228 @@ Print Row: Show all the details in one line.
                 }
             }
 
+            cout << "Record Found! Enter new details below." << endl;
+            cout << "--------------------------------------" << endl;
+
+            // Temporary Variables for Validation
+            // We are using temporary variables because so we dont corrupt the database if 
+            // the validation fails.
+
+            int TempRouteID;
+            int TempBusID;
+            int TempSeatNumber;
+            int TempFeeStatus;
+
+            // New Route
+            cout << "Enter New Route ID -- Eg.(101): ";
+            cin >> TempRouteID;
+
+            bool RouteFound = false;
+
+            for (int temporaryRouteIDFoundCounter = 0; temporaryRouteIDFoundCounter < 6; temporaryRouteIDFoundCounter++)
+            {
+                // Check if there 
+                if (RouteID[temporaryRouteIDFoundCounter] == TempRouteID)
+                {
+                    RouteFound = true;
+                    break;
+                }
+            }
+
+            if (!RouteFound)
+            {
+                cout << "Error: Invalid Route ID. Update has been Cancelled." << endl;
+            }
+
+            // New Bus
+            cout << "Enter New Bus ID: ";
+            cin >> TempBusID;
+
+            int NewTempBusIndex = -1;
+            for (int tempBusIDCounter = 0; tempBusIDCounter < 6; tempBusIDCounter++)
+            {
+                // Check if Buses exist and it matches the new route.
+                if (BusID[tempBusIDCounter] == TempBusID)
+                {
+                    if (BusRouteID[tempBusIDCounter] == TempRouteID)
+                    {
+                        NewTempBusIndex = tempBusIDCounter;
+                        break;
+                    }
+                    else
+                    {
+                        cout << "Error: Bus " << TempBusID << " is not assigned to Route " << TempRouteID << "." << endl;
+                        break;
+                    }
+                }
+            }
+
+            if (NewTempBusIndex == -1)
+            {
+                cout << "Invalid Bus ID and Invalid Route. Update has been Cancelled." << endl;
+                break;
+            }
+
+            // Check Capacity (Only if changing to a Different Bus).
+            // If on the same bus, no need to check the capacity as we are already occupying a seat.
+
+            if (NewTempBusIndex != OldBusIndex && BusSelectedSeats[NewTempBusIndex] >= BusCapacity[NewTempBusIndex])
+            {
+                cout << "Error! New Bus is Full." << endl;
+                break;
+            }
+
+            // New Seat Number.
+
+            cout << "Enter New Seat Number: ";
+            cin >> TempSeatNumber;
+
+            if (TempSeatNumber < 1 || TempSeatNumber > BusCapacity[NewTempBusIndex])
+            {
+                cout << "Error: Invalid Seat Number. Update has been Cancelled." << endl;
+                break;
+            }
+
+            // Check if Seat has been taken by someone else.
+            
+                bool SeatTaken = false;
+                for (int seatTakenCounter = 0; seatTakenCounter < 200; seatTakenCounter++)
+                {
+                    if (seatTakenCounter != FoundIndex && AllocationID[seatTakenCounter] != -1 && BusIDAllocation[seatTakenCounter] == TempBusID && SeatNumber[seatTakenCounter] == TempSeatNumber)
+                    {
+                        SeatTaken = true;
+                        break;
+                    }
+                }
+
+                if (SeatTaken)
+                {
+                    cout << "Error: Seat " << TempSeatNumber << " is already occupied on Bus " << TempBusID << "." << endl;
+                    break;
+                }
+
+                // Fee Status
+
+                cout << "Enter Fee Status ( 0 = Unpaid, 1 = Paid ): ";
+                cin >> TempFeeStatus;
+
+                if (TempFeeStatus != 0 && TempFeeStatus != 1)
+                {
+                    TempFeeStatus = 0;
+                }
+
+                // Now Saving Record.
+
+                if (OldBusIndex != -1)
+                {
+                    // Remove from Old bus.
+                    BusSelectedSeats[OldBusIndex]--;
+                    
+                }
+            
+                // Add to new Bus.
+                BusSelectedSeats[OldBusIndex]++;
+
+                // Updating database
+
+                RouteIDAllocation[FoundIndex] = TempRouteID;
+                BusIDAllocation[FoundIndex] = TempBusID;
+                SeatNumber[FoundIndex] = TempFeeStatus;
+                FeeStatus[FoundIndex] = TempFeeStatus;
+
+                cout << endl;
+                cout << "==========================================================" << endl;
+                cout << "         Allocation Record Updated Successfully!          " << endl;
+                cout << "==========================================================" << endl;
+                cout << endl;
+
+
         }
         break;
         case 7:
         {
             cout << "Cancel Seat Allocation selected." << endl;
+            cout << endl;
+
+            int SearchAllocationID;
+            cout << "Enter Allocation ID to cancel: ";
+            cin >> SearchAllocationID;
+
+            // Finding the Allocation Record Index 
+            int FoundIndex = -1;
+            for (int allocationIDCancelCounter = 0; allocationIDCancelCounter < 6; allocationIDCancelCounter++)
+            {
+                if (AllocationID[allocationIDCancelCounter] == SearchAllocationID)
+                {
+                    FoundIndex = allocationIDCancelCounter;
+                    break;
+                }
+            }
+
+            if (FoundIndex == -1)
+            {
+                cout << "Error: Allocation ID not found!" << endl;
+            }
+
+            // Now finding the bus index to decrease the booked seat count.
+
+            int BusIndex = -1;
+            for (int busIndexCounter = 0; busIndexCounter < 6; busIndexCounter++)
+            {
+                if (BusID[busIndexCounter] == BusIDAllocation[FoundIndex])
+                {
+                    BusIndex = busIndexCounter;
+                    break;
+                }
+            }
+
+            // Confirming the Cancellation.
+
+            char ConfirmCancellation;
+            cout << "Are you sure you want to cancel Allocation ID " << SearchAllocationID << " (y/n): ";
+            cin >> ConfirmCancellation;
+
+            if (ConfirmCancellation == 'y' || ConfirmCancellation == 'Y')
+            {
+                // Decrease Bus Seat Count
+                if (BusIndex != -1)
+                {
+                    if (BusSelectedSeats[BusIndex] > 0)
+                    {
+                        BusSelectedSeats[BusIndex]--;
+                    }
+                }
+
+
+                // Clear the Allocation Record to Default.
+                AllocationID[FoundIndex] = -1;
+                StudentID[FoundIndex] = -1;
+                RouteIDAllocation[FoundIndex] = -1;
+                BusIDAllocation[FoundIndex] = -1;
+                SeatNumber[FoundIndex] = 0;
+                FeeStatus[FoundIndex] = 0;
+                Semester[FoundIndex] = 0;
+
+                // Clear Strings (Name, Department, Contact)
+
+                int NameStart = FoundIndex * 50;
+                int DepartmentStart = FoundIndex * 50;
+                int ContactNumberStart = FoundIndex * 20;
+
+                // Empty string is \0.
+                StudentName[NameStart] = '\0';
+                StudentDepartment[DepartmentStart] = '\0';
+                StudentContactNumber[ContactNumberStart] = '\0';
+
+                cout << endl;
+                cout << "Allocation Cancelled Successfully." << endl;
+            }
+
+            else
+            {
+                cout << "Cancellation Aborted." << endl;
+            }
+            cout << endl;
         }
         break;
         case 8:
@@ -952,7 +1169,7 @@ Print Row: Show all the details in one line.
             cout << "Invalid Choice.Please Try Again." << endl;
         }
     } while (choice != 0); // Repeats till user enters 0
-    
+
     return 0;
 
 }
