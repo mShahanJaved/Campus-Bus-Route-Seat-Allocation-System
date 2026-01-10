@@ -173,9 +173,13 @@ and then 6th Route Ending is till 180.
 
 
 
-    cout << "============================================" << endl;
+    cout << "--------------------------------------------" << endl;
+    cout << "--------------------------------------------" << endl;
     cout << "  Bus Route & Seat Allocation System" << endl;
-    cout << "============================================" << endl;
+    cout << "--------------------------------------------" << endl;
+    cout << "--------------------------------------------" << endl;
+    cout << endl;
+    cout << endl;
     cout << endl;
     cout << endl;
 
@@ -995,57 +999,57 @@ Print Row: Show all the details in one line.
             }
 
             // Check if Seat has been taken by someone else.
-
-            bool SeatTaken = false;
-            for (int seatTakenCounter = 0; seatTakenCounter < 200; seatTakenCounter++)
-            {
-                if (seatTakenCounter != FoundIndex && AllocationID[seatTakenCounter] != -1 && BusIDAllocation[seatTakenCounter] == TempBusID && SeatNumber[seatTakenCounter] == TempSeatNumber)
+            
+                bool SeatTaken = false;
+                for (int seatTakenCounter = 0; seatTakenCounter < 200; seatTakenCounter++)
                 {
-                    SeatTaken = true;
+                    if (seatTakenCounter != FoundIndex && AllocationID[seatTakenCounter] != -1 && BusIDAllocation[seatTakenCounter] == TempBusID && SeatNumber[seatTakenCounter] == TempSeatNumber)
+                    {
+                        SeatTaken = true;
+                        break;
+                    }
+                }
+
+                if (SeatTaken)
+                {
+                    cout << "Error: Seat " << TempSeatNumber << " is already occupied on Bus " << TempBusID << "." << endl;
                     break;
                 }
-            }
 
-            if (SeatTaken)
-            {
-                cout << "Error: Seat " << TempSeatNumber << " is already occupied on Bus " << TempBusID << "." << endl;
-                break;
-            }
+                // Fee Status
 
-            // Fee Status
+                cout << "Enter Fee Status ( 0 = Unpaid, 1 = Paid ): ";
+                cin >> TempFeeStatus;
 
-            cout << "Enter Fee Status ( 0 = Unpaid, 1 = Paid ): ";
-            cin >> TempFeeStatus;
+                if (TempFeeStatus != 0 && TempFeeStatus != 1)
+                {
+                    TempFeeStatus = 0;
+                }
 
-            if (TempFeeStatus != 0 && TempFeeStatus != 1)
-            {
-                TempFeeStatus = 0;
-            }
+                // Now Saving Record.
 
-            // Now Saving Record.
+                if (OldBusIndex != -1)
+                {
+                    // Remove from Old bus.
+                    BusSelectedSeats[OldBusIndex]--;
+                    
+                }
+            
+                // Add to new Bus.
+                BusSelectedSeats[OldBusIndex]++;
 
-            if (OldBusIndex != -1)
-            {
-                // Remove from Old bus.
-                BusSelectedSeats[OldBusIndex]--;
+                // Updating database
 
-            }
+                RouteIDAllocation[FoundIndex] = TempRouteID;
+                BusIDAllocation[FoundIndex] = TempBusID;
+                SeatNumber[FoundIndex] = TempFeeStatus;
+                FeeStatus[FoundIndex] = TempFeeStatus;
 
-            // Add to new Bus.
-            BusSelectedSeats[OldBusIndex]++;
-
-            // Updating database
-
-            RouteIDAllocation[FoundIndex] = TempRouteID;
-            BusIDAllocation[FoundIndex] = TempBusID;
-            SeatNumber[FoundIndex] = TempFeeStatus;
-            FeeStatus[FoundIndex] = TempFeeStatus;
-
-            cout << endl;
-            cout << "==========================================================" << endl;
-            cout << "         Allocation Record Updated Successfully!          " << endl;
-            cout << "==========================================================" << endl;
-            cout << endl;
+                cout << endl;
+                cout << "==========================================================" << endl;
+                cout << "         Allocation Record Updated Successfully!          " << endl;
+                cout << "==========================================================" << endl;
+                cout << endl;
 
 
         }
@@ -1061,7 +1065,7 @@ Print Row: Show all the details in one line.
 
             // Finding the Allocation Record Index 
             int FoundIndex = -1;
-            for (int allocationIDCancelCounter = 0; allocationIDCancelCounter < 6; allocationIDCancelCounter++)
+            for (int allocationIDCancelCounter = 0; allocationIDCancelCounter < 200; allocationIDCancelCounter++)
             {
                 if (AllocationID[allocationIDCancelCounter] == SearchAllocationID)
                 {
@@ -1073,6 +1077,7 @@ Print Row: Show all the details in one line.
             if (FoundIndex == -1)
             {
                 cout << "Error: Allocation ID not found!" << endl;
+                break;
             }
 
             // Now finding the bus index to decrease the booked seat count.
@@ -1159,7 +1164,7 @@ Print Row: Show all the details in one line.
                 cin >> TargetID;
 
                 bool FoundAllocationID = false;
-
+                
                 for (int searchAllocationIDCounter = 0; searchAllocationIDCounter < 200; searchAllocationIDCounter++)
                 {
                     if (AllocationID[searchAllocationIDCounter] != -1 && AllocationID[searchAllocationIDCounter] == TargetID)
@@ -1171,7 +1176,7 @@ Print Row: Show all the details in one line.
                         int DepartmentNamesIndex = searchAllocationIDCounter * 50;
 
                         cout << "---- Record Found ----" << endl;
-
+                        
                         cout << "Allocation ID: " << AllocationID[searchAllocationIDCounter] << endl;
                         cout << "Student ID: " << StudentID[searchAllocationIDCounter] << endl;
                         cout << "Name: " << &StudentName[StartingNamesIndex] << endl;
@@ -1238,7 +1243,7 @@ Print Row: Show all the details in one line.
                 {
                     cout << "No Students have been found in this bus." << endl;
                 }
-
+                
             }
             else
             {
@@ -1305,13 +1310,13 @@ Print Row: Show all the details in one line.
                 {
                     cout << endl; // new row after every 4 seats
                 }
-                else if (seatCounter % 2 == 0)
+                else if (seatCounter % 2 == 0) 
                 {  // space after 2 seats
                     cout << "   ";
                 }
             }
             cout << endl;
-
+           
         }
         break;
         case 10:
@@ -1508,3 +1513,6 @@ Print Row: Show all the details in one line.
     return 0;
 
 }
+
+
+
